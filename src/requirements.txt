@@ -1,0 +1,4 @@
+torch==2.1.2+cu118
+transformers==4.43.3
+trl
+peft
