@@ -31,3 +31,7 @@ Following is the methodology:
        2. LoRA Alpha 32
        3. No LoRA dropout
     2. Beta 0.1
+
+You can find the generated samples [here](/assets/llama2_red_prompts.csv)
+
+1 A100 GPU takes 8 hours to run for 10 steps
