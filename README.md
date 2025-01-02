@@ -1,5 +1,5 @@
 # Red Teaming LMs with LMs
-This repository contains a methodology to train a LLM to generate Red Team prompts for a target LLM based on the paper "Red Teaming Language Models with Language Models" by Perez et al.
+This repository contains a methodology to train a LLM to generate Red Team prompts for a target LLM based on the paper "[Red Teaming Language Models with Language Models](https://arxiv.org/pdf/2202.03286)" by Perez et al.
 
 ![methodology](/assets/images/dpo.png)
 
@@ -8,16 +8,16 @@ Following is the methodology:
     1. Manually generated 5 red team prompts
     2. Created a few shot prompt using these examples
 2. Sample a red LLM using prompt from step 1 and generate 1k samples
-    1. Used Mistral 7b Instruct v0.2
+    1. Used [Mistral 7b Instruct v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)
     2. In order to maximise diversity, we used
         1. Temperature: 0.9
         2. Top p: 0.95
         3. Top k: 50
     3. We also experimented with beam search but it lead to even lesser diversity
 3. Generate responses from the Target LLM
-    1. Used Llama 2 7b
+    1. Used [Llama 2 7b](https://huggingface.co/meta-llama/Llama-2-7b-hf)
 4. Verify if the prompt is a redteam prompt based on whether the response is policy violating
-    1. To verify whether a response is policy violating we use ShiledGemma
+    1. To verify whether a response is policy violating we use [ShiledGemma 2b](https://huggingface.co/google/shieldgemma-2b)
     2. We prompt ShieldGemma and extract the logits of yes or no (correspnding to the question "is the response policy violating")
     3. We convert these logits to probabilities using softmax
     4. A redteam prompt is where probability of yes >= probability of no
@@ -25,8 +25,8 @@ Following is the methodology:
     1. Prompt is from step 1
     2. Chosen samples are redteam prompts
     3. Rejected samples are benign prompts
-6. Train red LLM using Direct Preference Optimisation
-    1. Used LoRA finetuning
+6. Train red LLM using [Direct Preference Optimisation](https://arxiv.org/pdf/2305.18290)
+    1. Used [LoRA](https://arxiv.org/pdf/2106.09685) finetuning
        1. Rank 32
        2. LoRA Alpha 32
        3. No LoRA dropout
